@@ -1,10 +1,10 @@
 import { ThirdwebProvider } from "@thirdweb-dev/react";
-import { Gnosis } from "@thirdweb-dev/chains";
+import { Gnosis,ChiadoTestnet } from "@thirdweb-dev/chains";
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
   return (
-    <ThirdwebProvider activeChain={Gnosis}>
+    <ThirdwebProvider activeChain={ChiadoTestnet}>
       <Component {...pageProps} />
     </ThirdwebProvider>
   )
