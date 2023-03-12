@@ -9,9 +9,10 @@ export default function Sidebar() {
     const address = useAddress();
     const disconnect = useDisconnect();
 
-	function handleLogout() {
+	async function handleLogout() {
+        // Not working.
         if(address){
-            disconnect();
+           await disconnect();
         }
 		router.push("/");
 	}
