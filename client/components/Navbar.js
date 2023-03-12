@@ -1,10 +1,7 @@
 import styles from "../styles/Navbar.module.css";
 import {
-	ChainId,
 	ConnectWallet,
 	useAddress,
-	useNetwork,
-	useNetworkMismatch,
 } from "@thirdweb-dev/react";
 import { useRouter } from "next/router";
 
@@ -22,6 +19,6 @@ export default function Navbar() {
 			</div>
 		);
 	} else {
-		router.push('/dashboard');
+		router.push('/register');
 	}
 }
