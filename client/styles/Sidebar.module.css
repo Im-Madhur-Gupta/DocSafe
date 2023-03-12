@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@100;200;300;400;500;600;700&family=Manrope:wght@200;300;400;500;600;700;800&family=Montserrat:wght@800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@100;200;300;400;500;600;700&family=Manrope:wght@200;300;400;500;600;700;800&family=Montserrat:wght@300;400;800;900&display=swap');
 
 
 .container {
@@ -13,8 +13,6 @@
 
 
 .title {
-    position: absolute;
-    top: 0px;
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: 900;
@@ -26,4 +24,32 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.linkContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.dashboardTitleHolder {
+    background: #2B2C30;
+    border-radius: 87px;
+    margin-left: 30px;
+    margin-right: 30px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dashboardTitle {
+
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 39px;
+    color: #FFFFFF;
+
 }

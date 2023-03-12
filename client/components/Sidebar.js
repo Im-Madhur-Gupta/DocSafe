@@ -6,6 +6,11 @@ export default function Sidebar(){
             <div className={styles.title}>
                 FileShare.io
             </div>
+            <div className={styles.linkContainer}>
+                <div className={styles.dashboardTitleHolder}>
+                    <h1 className={styles.dashboardTitle}>Dashboard</h1>
+                </div>
+            </div>
         </div>
     )
 }
