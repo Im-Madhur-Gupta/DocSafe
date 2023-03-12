@@ -7,7 +7,7 @@ export default function register() {
     const router = useRouter();
 
     function proceed(){
-        router.push('/dashboard');
+        router.push('/dashboard/myFiles');
     }
 
 	return (
