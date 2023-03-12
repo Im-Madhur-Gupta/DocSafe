@@ -2,7 +2,6 @@
 
 
 .container {
-
     width: 408px;
     height: 1080px;
     background: #222326;
@@ -88,4 +87,23 @@
     font-size: 18px;
     line-height: 39px;
     color: #FFFFFF;
+}
+
+
+
+.selectedLink{
+   background: #4285F4;
+    border-radius: 87px;
+    width: 250px;
+    height: 50px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 35px;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 39px;
+    color: #FFFFFF; 
 }
