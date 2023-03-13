@@ -54,7 +54,7 @@
 .linksBox {
     display: flex;
     flex-direction: row;
-    gap: 55px;
+    gap: 36px;
     justify-content: space-evenly;
     margin-top: 30px;
     margin-left: 200px;
