@@ -14,7 +14,7 @@ export default async function handler(req, res) {
     const result = await userDataColl.insertOne(newUser);
     console.log(result);
 
-    res.status(200).json({ message: "document inserted successfully", objectId: result.insertId })
+    res.status(200).json({ message: "document inserted successfully", objectId: result.insertedId })
   }
   catch (err) {
     console.log(err);

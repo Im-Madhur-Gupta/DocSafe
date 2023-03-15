@@ -23,6 +23,8 @@
     /* identical to box height */
     color: #FFFFFF;
     padding-left: 30px;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 
@@ -34,6 +36,7 @@
     line-height: 49px;
     padding-left: 30px;
     margin-top: -40px;
+    margin-bottom: 50px;
     /* identical to box height */
     color: rgba(255, 255, 255, 0.3);
 }
@@ -41,11 +44,12 @@
 .dndBox {
     width: 95%;
     margin: 40px;
-    height: 78%;
+    /* height: 78%; */
     margin-top: -20px;
     background: #222326;
     border-radius: 35px;
     padding-top: 8px;
+    padding-bottom: 8px;
 }
 
 
@@ -53,7 +57,7 @@
 .dndContainer {
     width: 95%;
     margin: 30px;
-    height: 65%;
+    height: 50vh;
     background: #2B2C30;
     border: 3px dashed #4B4D54;
     border-radius: 35px;
@@ -69,9 +73,9 @@
     padding: 10px;
 }
 
-.dndInput{
+.dndInput {
     opacity: 0;
-    position:absolute;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -80,12 +84,12 @@
 }
 
 .dndContainer:hover,
-.dndContainer.dragover{
+.dndContainer.dragover {
     opacity: 0.6;
 }
 
 
-.dndLabel{
+.dndLabel {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -96,4 +100,68 @@
     font-size: 40px;
     line-height: 49px;
     padding: 10px;
+}
+
+.previewFiles {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 18px;
+    gap: 18px;
+}
+
+.filebox {
+    position: relative;
+    background: #2B2C30;
+    border-radius: 20px;
+    margin: 10px;
+    width: 240px;
+    height: 100px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+
+    color: #FFFFFF;
+}
+
+.buttonContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+.uploadBtn{
+    background: #4285F4;
+    border: 1px solid #4B4D54;
+    box-sizing: border-box;
+    border-radius: 20px;
+    width: 200px;
+    height: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+
+.cancelHolder{
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 20px;
 }
