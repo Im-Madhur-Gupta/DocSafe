@@ -1,5 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@100;200;300;400;500;600;700&family=Manrope:wght@200;300;400;500;600;700;800&family=Montserrat:wght@300;400;800;900&family=Poppins:wght@100;200;300;400;500;600&display=swap');
+
+
 .container {
     background: #2B2C30;
     width: 100%;
     height: 100vh;
+}
+
+.greetHolder {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-left: 15px;
+}
+
+.welcome {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 54px;
+    line-height: 78px;
+    /* identical to box height */
+    color: #FFFFFF;
+    padding-left: 30px;
+    margin-top: 25px;
+    margin-bottom: 30px;
+}
+
+
+.username {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 49px;
+    padding-left: 30px;
+    margin-top: -40px;
+    margin-bottom: 50px;
+    /* identical to box height */
+    color: rgba(255, 255, 255, 0.3);
+}
+
+
+.myFilesContainer {
+    position: relative;
+    background: #222326;
+    border-radius: 35px;
+    width: 94%;
+    margin-left: 45px;
+}
+
+.myFilesTitleHolder{
+    position:relative;;
+    height: 7vh;
+}
+
+.myFilesTitle {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 34px;
+    /* identical to box height */
+    color: #FFFFFF;
+    margin-bottom: 40px;
+}
+
+.myFilesHolder {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 40px;
+    padding: 33px;
+}
+
+.filebox {
+    background: #4285F4;
+    border-radius: 25px;
+    width: 306px;
+    height: 200px;
+    position: relative;
+}
+
+.fileTextHolder{
+    position: absolute;
+    bottom:0;
+    left:0;
+    height: 30%;
+    width: 100%;
+    background: #383A3F;
+    border-radius: 0px 0px 25px 25px;
+    display: flex;
+    flex-direction: row;
+    padding: 30px;
+    justify-content: space-between;
+    align-items: center;
 }

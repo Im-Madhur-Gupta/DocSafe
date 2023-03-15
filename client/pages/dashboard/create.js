@@ -45,10 +45,6 @@ export default function create() {
 	return (
 		<Layout>
 			<div className={styles.container}>
-				<div className={styles.greetHolder}>
-					<h1 className={styles.welcome}>Welcome Back!</h1>
-					<h3 className={styles.username}>@username</h3>
-				</div>
 				<div className={styles.dndBox}>
 					<div
 						ref={wrapperRef}

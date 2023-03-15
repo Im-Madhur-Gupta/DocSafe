@@ -6,46 +6,12 @@
 }
 
 
-.greetHolder {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding-left: 15px;
-}
 
-.welcome {
-
-    font-family: 'Poppins', sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 54px;
-    line-height: 78px;
-    /* identical to box height */
-    color: #FFFFFF;
-    padding-left: 30px;
-    margin-top: 50px;
-    margin-bottom: 50px;
-}
-
-
-.username {
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 49px;
-    padding-left: 30px;
-    margin-top: -40px;
-    margin-bottom: 50px;
-    /* identical to box height */
-    color: rgba(255, 255, 255, 0.3);
-}
 
 .dndBox {
     width: 95%;
     margin: 40px;
     /* height: 78%; */
-    margin-top: -20px;
     background: #222326;
     border-radius: 35px;
     padding-top: 8px;
