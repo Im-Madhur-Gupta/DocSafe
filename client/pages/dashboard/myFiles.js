@@ -1,9 +1,13 @@
 import Layout from "../../layout/layout";
 
-export default function myFiles(){
-    return (
-        <Layout>
-            <h1>My Files</h1>
+import styles from "../../styles/MyFile.module.css";
+
+export default function MyFiles(){
+	return (
+		<Layout>
+            <div className={styles.container}>
+            
+            </div>
         </Layout>
-    )
-}
+	);
+};
