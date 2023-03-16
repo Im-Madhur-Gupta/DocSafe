@@ -2,6 +2,8 @@ import styles from "../styles/Sidebar.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useAddress,useDisconnect } from "@thirdweb-dev/react";
+import getUsernameFromAddress from "../utils/getUsernameFromAddress";
+import { useEffect, useState } from "react";
 
 export default function Sidebar() {
 	const router = useRouter();
