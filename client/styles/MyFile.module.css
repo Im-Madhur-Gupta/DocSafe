@@ -73,14 +73,10 @@
     cursor: grab;
     overflow: hidden;
     width: 100%;
-}
-
-.myFilesHolder {
     display: flex;
     flex-direction: row;
     gap: 40px;
-    padding: 33px 0;
-    /* overflow: auto; */
+    padding: 2.5rem;
 }
 
 .filebox {
