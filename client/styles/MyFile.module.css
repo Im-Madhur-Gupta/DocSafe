@@ -3,7 +3,7 @@
 
 .container {
     background: #2B2C30;
-    width: 100%;
+    width: 80%;
     height: 100vh;
 }
 
@@ -50,8 +50,9 @@
     margin-left: 45px;
 }
 
-.myFilesTitleHolder{
-    position:relative;;
+.myFilesTitleHolder {
+    position: relative;
+    ;
     height: 7vh;
 }
 
@@ -68,26 +69,32 @@
     margin-bottom: 40px;
 }
 
+.myFileHolderParent {
+    cursor: grab;
+    overflow: hidden;
+    width: 100%;
+}
+
 .myFilesHolder {
     display: flex;
-    flex-wrap: wrap;
     flex-direction: row;
     gap: 40px;
-    padding: 33px;
+    padding: 33px 0;
+    /* overflow: auto; */
 }
 
 .filebox {
     background: #4285F4;
     border-radius: 25px;
-    width: 306px;
+    min-width: 306px;
     height: 200px;
     position: relative;
 }
 
-.fileTextHolder{
+.fileTextHolder {
     position: absolute;
-    bottom:0;
-    left:0;
+    bottom: 0;
+    left: 0;
     height: 30%;
     width: 100%;
     background: #383A3F;
