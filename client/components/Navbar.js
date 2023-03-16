@@ -7,6 +7,19 @@ import { useState, useEffect } from "react";
 export default function Navbar() {
 	const address = useAddress();
 	const router = useRouter();
+	const [userName, setUserName] = useState(null);
+
+	useEffect(() => {
+		if (address) {
+			getUsernameFromAddress(address)
+				.then((name) => {
+					setUserName(name);
+				})
+				.catch((error) => {
+					console.error(error);
+				});
+		}
+	}, [address]);
 
 	if (!address) {
 		return (
@@ -17,11 +30,9 @@ export default function Navbar() {
 				</div>
 			</div>
 		);
+	} else if (userName) {
+		router.push("/dashboard/myFiles");
 	} else {
-		const user = getUsernameFromAddress(address);
-		if (user) {
-			router.push("/dashboard/myFiles");
-		}
-		router.push("/register");
+		router.push("/register")
 	}
 }
