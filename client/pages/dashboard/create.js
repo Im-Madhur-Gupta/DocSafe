@@ -28,7 +28,7 @@ export default function create() {
 	const [shareWith, setShareWith] = useState([]);
 	const { isOpen, onToggle } = useDisclosure();
 	const [tabIndex, setTabIndex] = useState(0);
-	const [fileName,setFileName]=useState("")
+	const [fileName, setFileName] = useState("");
 
 	function handleNextTab() {
 		setTabIndex(1);
@@ -107,14 +107,16 @@ export default function create() {
 											size="lg"
 											type="name"
 											value={fileName}
-											onChange={(e)=>setFileName(e.target.value)}
+											onChange={(e) =>
+												setFileName(e.target.value)
+											}
 										/>
 									</FormControl>
 									<FormControl isRequired color="white">
 										<FormLabel>Share with</FormLabel>
 										<Input
-											type="email"
-											placeholder="Add email of the people to share with"
+											type="text"
+											placeholder="Add username of the people to share with"
 											size="lg"
 											onKeyDown={handleKeyDown}
 										/>
@@ -197,12 +199,14 @@ export default function create() {
 													styles.buttonContainer
 												}
 											>
-												<button
+												<Button
+													color="white"
+													bg="brand.100"
+													size="lg"
 													onClick={handleSubmit}
-													className={styles.uploadBtn}
 												>
-													Add Files
-												</button>
+													Share Files
+												</Button>
 											</div>
 										</div>
 									)}
