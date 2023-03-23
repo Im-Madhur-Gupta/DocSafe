@@ -33,7 +33,7 @@ import {
 	useCollection,
 } from "@polybase/react";
 
-export default function create() {
+export default function Create() {
 	const wrapperRef = useRef(null);
 	const [fileList, setFileList] = useState([]);
 	const [shareWith, setShareWith] = useState([]);

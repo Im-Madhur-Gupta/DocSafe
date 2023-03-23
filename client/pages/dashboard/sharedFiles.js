@@ -44,7 +44,7 @@ const dummyFile = [
 	},
 ];
 
-export default function sharedFiles() {
+export default function SharedFiles() {
 	const [fileList, setFileList] = useState(dummyFile);
 
 	return (
