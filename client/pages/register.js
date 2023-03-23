@@ -6,7 +6,7 @@ import { useAddress } from "@thirdweb-dev/react";
 
 import styles from "../styles/Register.module.css";
 
-export default function register() {
+export default function Register() {
 	const router = useRouter();
 	const address = useAddress();
 
