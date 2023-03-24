@@ -24,8 +24,7 @@ Poly-Safe uses **IPFS** to make sure that the files stored in the safes are alwa
 
 ## Technologies used
 
-- React
-- Next
+- Next.js
 - Ethers
 - IPFS
 - Polybase
