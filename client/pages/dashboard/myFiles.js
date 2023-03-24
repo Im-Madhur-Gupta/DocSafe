@@ -149,6 +149,8 @@ export default function MyFiles() {
       .where("account", "==", `0x6e7F1a7d1Bac9c7784c7C7Cdb098A727F62E95c7`)
   );
 
+  console.log(data);
+
   useEffect(() => {
     (async () => {
       //   polybaseTest();

@@ -3,7 +3,7 @@ import { ConnectWallet, useAddress } from "@thirdweb-dev/react";
 import getUsernameFromAddress from "../utils/getUsernameFromAddress";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import { useAuth } from "@polybase/react";
+import { useAuth, usePolybase } from "@polybase/react";
 import { Button } from "@chakra-ui/react";
 
 export default function Navbar() {
@@ -12,11 +12,17 @@ export default function Navbar() {
 	const [userName, setUserName] = useState(null);
 	const { auth } = useAuth();
 	const [publicKey, setPublicKey] = useState(null);
+	const polybase = usePolybase();
 
 	async function signIn() {
 		const response = await auth.signIn();
-		console.log(response);
 		setPublicKey(response.publicKey);
+		polybase.signer(async (data)=>{
+            return{
+                h:'eth-personal-sign',
+                sig:await auth.ethPersonalSign(data),
+            }
+        });
 	}
 
 	

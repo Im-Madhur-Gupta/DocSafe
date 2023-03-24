@@ -1,7 +1,6 @@
 import Layout from "../../layout/layout";
 import styles from "../../styles/Create.module.css";
 import { AiOutlineCloudUpload } from "react-icons/ai";
-import { RxCross1 } from "react-icons/rx";
 import { useEffect, useRef, useState } from "react";
 import {
 	Tabs,
@@ -25,13 +24,8 @@ import initializeNewUser from "../../utils/polybaseConnection";
 import { Polybase } from "@polybase/client";
 import { ethPersonalSign } from "@polybase/eth";
 import { Auth } from "@polybase/auth";
-import {
-	usePolybase,
-	useDocument,
-	useAuth,
-	useIsAuthenticated,
-	useCollection,
-} from "@polybase/react";
+import { usePolybase, useAuth, useCollection } from "@polybase/react";
+import { useStorageUpload } from "@thirdweb-dev/react";
 
 export default function Create() {
 	const wrapperRef = useRef(null);
@@ -40,6 +34,8 @@ export default function Create() {
 	const { isOpen, onToggle } = useDisclosure();
 	const [tabIndex, setTabIndex] = useState(0);
 	const [fileName, setFileName] = useState("");
+	const { mutateAsync: upload } = useStorageUpload();
+	const { auth, state } = useAuth();
 
 	function handleNextTab() {
 		setTabIndex(1);
@@ -83,10 +79,21 @@ export default function Create() {
 		setFileList(updatedList);
 	}
 
-	function handleSubmit() {
-		UploadFile();
-		console.log("submit");
-		handleNextTab();
+	async function handleSubmit() {
+		const uris = await upload({ data: fileList });
+		console.log(uris);
+		for (let i = 0; i < uris.length; i++) {
+			const res = await polybase
+				.collection("Safes")
+				.create([
+					state.userId,
+					`${uris[i].slice(7)}`,
+					`${uris[i].slice(uris[i].lastIndexOf("/") + 1)}`,
+					"kasldasd",
+				]);
+
+			console.log(res);
+		}
 	}
 
 	function handleAddDetails() {}
@@ -97,42 +104,32 @@ export default function Create() {
 
 	const polybase = usePolybase();
 
-	const { auth, state, loading } = useAuth();
+	// const { auth, state, loading } = useAuth();
 
-	const { data, error, dataLoading } = useCollection(
-		polybase
-			.collection("Safes")
-			.where(
-				"account",
-				"==",
-				`0x6e7F1a7d1Bac9c7784c7C7Cdb098A727F62E95c7`
-			)
-	);
+	// const { data, error, dataLoading } = useCollection(
+	// 	polybase
+	// 		.collection("Safes")
+	// 		.where(
+	// 			"account",
+	// 			"==",
+	// 			`0x6e7F1a7d1Bac9c7784c7C7Cdb098A727F62E95c7`
+	// 		)
+	// );
 
-	useEffect(() => {
-		(async () => {
-			//   polybaseTest();
-		})();
-	}, []);
+	// useEffect(() => {
+	// 	(async () => {
+	// 		//   polybaseTest();
+	// 	})();
+	// }, []);
 
-	async function polybaseTest() {
-		console.log("Polybase test");
-		await auth.signIn();
-	}
+	// Not needed for on create page
+	// async function polybaseTest() {
+	// 	console.log("Polybase test");
+	// 	await auth.signIn();
+	// }
 
 	async function UploadFile() {
 		console.log(data.data);
-
-		const res = await polybase
-			.collection("Safes")
-			.create([
-				`${data.data.length}`,
-				`0x6e7F1a7d1Bac9c7784c7C7Cdb098A727F62E95c7`,
-				`${fileName}`,
-				`bafybeigdyrzt5sfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fbzdi`,
-			]);
-
-		console.log(res);
 	}
 
 	return (
@@ -215,7 +212,7 @@ export default function Create() {
 													size="lg"
 													onClick={handleSubmit}
 												>
-													Share Files
+													Upload Files
 												</Button>
 											</div>
 										</div>

@@ -15,8 +15,6 @@ export default function Sidebar() {
 		router.push("/");
 	}
 
-	console.log(state);
-
 	return (
 		<div className={styles.container}>
 			<div>
