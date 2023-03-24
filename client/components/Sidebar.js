@@ -1,23 +1,21 @@
 import styles from "../styles/Sidebar.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useAddress,useDisconnect } from "@thirdweb-dev/react";
-import getUsernameFromAddress from "../utils/getUsernameFromAddress";
-import { useEffect, useState } from "react";
+import { useAuth } from "@polybase/react";
+
+import { Button } from "@chakra-ui/react";
 
 export default function Sidebar() {
 	const router = useRouter();
 	const path = router.asPath.split("/").pop();
-    const address = useAddress();
-    const disconnect = useDisconnect();
+	const { auth, state } = useAuth();
 
 	async function handleLogout() {
-        // Not working.
-        if(address){
-           await disconnect();
-        }
+		await auth.signOut();
 		router.push("/");
 	}
+
+	console.log(state);
 
 	return (
 		<div className={styles.container}>
@@ -72,9 +70,16 @@ export default function Sidebar() {
 					<div className={styles.profileIcon}></div>
 					<div className={styles.profileName}>@username</div>
 				</div>
-				<button onClick={handleLogout} className={styles.logout}>
-					Logout
-				</button>
+				<div className={styles.logout}>
+					<Button
+						onClick={handleLogout}
+						color="white"
+						bg="brand.100"
+						size="lg"
+					>
+						Logout
+					</Button>
+				</div>
 			</div>
 		</div>
 	);

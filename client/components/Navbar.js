@@ -3,36 +3,40 @@ import { ConnectWallet, useAddress } from "@thirdweb-dev/react";
 import getUsernameFromAddress from "../utils/getUsernameFromAddress";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+import { useAuth } from "@polybase/react";
+import { Button } from "@chakra-ui/react";
 
 export default function Navbar() {
 	const address = useAddress();
 	const router = useRouter();
 	const [userName, setUserName] = useState(null);
+	const { auth } = useAuth();
+	const [publicKey, setPublicKey] = useState(null);
 
-	useEffect(() => {
-		if (address) {
-			getUsernameFromAddress(address)
-				.then((name) => {
-					setUserName(name);
-				})
-				.catch((error) => {
-					console.error(error);
-				});
-		}
-	}, [address]);
+	async function signIn() {
+		const response = await auth.signIn();
+		console.log(response);
+		setPublicKey(response.publicKey);
+	}
 
-	if (!address) {
+	
+	if (!publicKey) {
 		return (
 			<div className={styles.container}>
 				<div className={styles.profile}></div>
 				<div className={styles.wallet}>
-					<ConnectWallet />
+					<Button
+						color="white"
+						bg="brand.100"
+						size="lg"
+						onClick={signIn}
+					>
+						Login
+					</Button>
 				</div>
 			</div>
 		);
-	} else if (userName) {
-		router.push("/dashboard/myFiles");
 	} else {
-		router.push("/register")
+		router.push("/dashboard/myFiles");
 	}
 }

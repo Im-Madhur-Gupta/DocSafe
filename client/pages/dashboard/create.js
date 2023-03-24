@@ -84,14 +84,12 @@ export default function Create() {
 	}
 
 	function handleSubmit() {
-    UploadFile();
+		UploadFile();
 		console.log("submit");
-    handleNextTab();
+		handleNextTab();
 	}
 
-  function handleAddDetails(){
-
-  }
+	function handleAddDetails() {}
 
 	useEffect(() => {
 		console.log(fileList);
