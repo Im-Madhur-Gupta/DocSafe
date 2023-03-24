@@ -15,6 +15,7 @@
     "@polybase/auth": "^0.3.37",
     "@polybase/client": "^0.3.37",
     "@polybase/react": "^0.3.37",
+    "@polybase/util": "^0.3.38",
     "@thirdweb-dev/chains": "^0.1.6",
     "@thirdweb-dev/react": "^3.10.3",
     "@thirdweb-dev/sdk": "^3.10.3",
@@ -29,8 +30,8 @@
     "react-pdf": "^5.2.0"
   },
   "devDependencies": {
-    "file-loader": "^6.2.0",
     "eslint": "8.36.0",
-    "eslint-config-next": "13.2.4"
+    "eslint-config-next": "13.2.4",
+    "file-loader": "^6.2.0"
   }
 }

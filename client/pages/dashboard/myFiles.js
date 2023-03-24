@@ -146,16 +146,16 @@ export default function MyFiles() {
   const { data, error, dataLoading } = useCollection(
     polybase
       .collection("Safes")
-      .where("account", "==", `0x6e7F1a7d1Bac9c7784c7C7Cdb098A727F62E95c7`)
+      .where("account", "==", "0x6e7f1a7d1bac9c7784c7c7cdb098a727f62e95c7")
+    // .where("account", "==", `0x6e7F1a7d1Bac9c7784c7C7Cdb098A727F62E95c7`)
   );
-
-  console.log(data);
 
   useEffect(() => {
     (async () => {
       //   polybaseTest();
+      console.log(data);
     })();
-  }, []);
+  }, [data]);
 
   async function polybaseTest() {
     console.log("Polybase test");
