@@ -23,6 +23,14 @@ export default function Navbar() {
                 sig:await auth.ethPersonalSign(data),
             }
         });
+
+		try{
+			const user = await polybase.collection('User').record(response.publicKey).get();
+			console.log("User",user)
+		}catch(err){
+			const user = await polybase.collection('User').create([]);
+			console.log("User",user);
+		}
 	}
 
 	
