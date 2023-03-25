@@ -1,5 +1,8 @@
-### Poly-Safe
-Poly-Safe is a web application that allows users to create decentralized safes for storing and sharing files. The safes are secured with encryption and can only be accessed by authorized parties.
+<h1 align="center">PolySafe</h1>
+<p align="center">
+  <img width="572" alt="poly safe logo" src="https://user-images.githubusercontent.com/76112446/227716252-dde961f7-7dcd-41af-9f19-4ed06edeeec7.png">
+</p>
+PolySafe is a web application that allows users to create decentralized safes for storing and sharing files. The safes are secured with encryption and can only be accessed by authorized parties.
 
 ## Features
 - Create a new safe
@@ -25,7 +28,7 @@ Poly-Safe uses **IPFS** to make sure that the files stored in the safes are alwa
 ## Technologies used
 
 - Next.js
-- Ethers
+- Ethers.js
 - IPFS
 - Polybase
 
