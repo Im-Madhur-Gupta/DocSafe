@@ -7,7 +7,7 @@ const CustomPDFViewer = dynamic(() => import("../../components/CustomPDFViewer")
 
 export default function PDF() {
     const router = useRouter()
-    const { cid } = router.query
+    const { cid, filename } = router.query
 
-    return <CustomPDFViewer pdf={`https://${cid}.ipfs.w3s.link/Madhur%20Contract%20Extension%20Maya.pdf`} />;
+    return <CustomPDFViewer pdf={`https://${cid}.ipfs.w3s.link/${filename}.pdf`} />;
 }

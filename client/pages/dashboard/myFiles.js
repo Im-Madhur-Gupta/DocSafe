@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/router";
 import Layout from "../../layout/layout";
 import styles from "../../styles/MyFile.module.css";
 import { animate, motion, useMotionValue, useScroll } from "framer-motion";
@@ -79,6 +80,8 @@ export default function MyFiles() {
   const [trackMouse, setTrackMouse] = useState(false);
   const [animationComplete, setAnimationComplete] = useState(true);
 
+  const router = useRouter();
+
   const x = useMotionValue(0);
 
   const handleMouseMove = (e) => {
@@ -135,6 +138,10 @@ export default function MyFiles() {
     if (animationComplete) {
       x.set(ref.current.scrollLeft);
     }
+  };
+
+  const openPdfFileHandler = (cid, filename) => {
+    router.push(`/view-pdf/${cid}/${filename}`);
   };
 
   // Code for polybase connection starts below
@@ -207,17 +214,31 @@ export default function MyFiles() {
           >
             {data != null
               ? data.data.map((item, index) => (
-                  <motion.div
-                    key={index}
-                    className={styles.filebox}
-                    style={{ userSelect: trackMouse ? "none" : "auto" }}
-                  >
-                    <div className={styles.fileTextHolder}>
-                      <h1 className={item.filename}>{item.data.name}</h1>
-                      <h3 className={item.filesize}>{item.data.id}</h3>
-                    </div>
-                  </motion.div>
-                ))
+                <motion.div
+                  key={index}
+                  className={styles.filebox}
+                  style={{ userSelect: trackMouse ? "none" : "auto" }}
+                  onClick={() => {
+                    const cid = item.data.cid.split("/")[0];
+                    console.log("CID", cid);
+
+                    const filename = encodeURIComponent(item.data.name);
+                    console.log("Filename", filename);
+
+                    const filetype = filename.split(".")[1].toLocaleLowerCase();
+
+                    if (filetype === "pdf") {
+                      openPdfFileHandler(cid, filename);
+                    }
+                    // Adding handler for imgs and videos here
+                  }}
+                >
+                  <div className={styles.fileTextHolder}>
+                    <h1 className={item.filename}>{item.data.name}</h1>
+                    <h3 className={item.filesize}>{item.data.id}</h3>
+                  </div>
+                </motion.div>
+              ))
               : ""}
           </motion.div>
         </div>
