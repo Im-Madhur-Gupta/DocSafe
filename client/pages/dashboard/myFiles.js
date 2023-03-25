@@ -141,7 +141,11 @@ export default function MyFiles() {
   };
 
   const openPdfFileHandler = (cid, filename) => {
-    router.push(`/view-pdf/${cid}/${filename}`);
+    router.push(`/view-pdf/${cid}?filename=${filename}`);
+  };
+
+  const openMediaFileHandler = (cid, filename) => {
+    router.push(`/view-media/${cid}?filename=${filename}`);
   };
 
   const viewFileHandler = (cid, filename) => {
@@ -154,9 +158,13 @@ export default function MyFiles() {
     const filetype = formattedFilename.split(".")[1].toLocaleLowerCase();
 
     if (filetype === "pdf") {
-      openPdfFileHandler(formattedCid, formattedFilename);
+      return openPdfFileHandler(formattedCid, formattedFilename);
     }
-    // Adding handler for imgs and videos here
+
+    const mediaFileTypes = ["mp4", "jpeg", "jpg", "png", "gif", "webp", "svg"];
+    if (mediaFileTypes.includes(filetype)) {
+      return openMediaFileHandler(formattedCid, formattedFilename);
+    }
   }
 
 
@@ -234,10 +242,13 @@ export default function MyFiles() {
                   key={index}
                   className={styles.filebox}
                   style={{ userSelect: trackMouse ? "none" : "auto" }}
-                  // onClick={
+                  onClick={
                     // open modal here
-                    // for view file call -> viewFileHandler(item.data.cid, item.data.name)
-                  // }
+                    // for view file call -> 
+                    () => {
+                      viewFileHandler(item.data.cid, item.data.name)
+                    }
+                  }
                 >
                   <div className={styles.fileTextHolder}>
                     <h1 className={item.filename}>{item.data.name}</h1>
