@@ -144,6 +144,22 @@ export default function MyFiles() {
     router.push(`/view-pdf/${cid}/${filename}`);
   };
 
+  const viewFileHandler = (cid, filename) => {
+    const formattedCid = cid.split("/")[0];
+    console.log("CID", formattedCid);
+
+    const formattedFilename = encodeURIComponent(filename);
+    console.log("Filename", formattedFilename);
+
+    const filetype = formattedFilename.split(".")[1].toLocaleLowerCase();
+
+    if (filetype === "pdf") {
+      openPdfFileHandler(formattedCid, formattedFilename);
+    }
+    // Adding handler for imgs and videos here
+  }
+
+
   // Code for polybase connection starts below
 
   const polybase = usePolybase();
@@ -218,20 +234,10 @@ export default function MyFiles() {
                   key={index}
                   className={styles.filebox}
                   style={{ userSelect: trackMouse ? "none" : "auto" }}
-                  onClick={() => {
-                    const cid = item.data.cid.split("/")[0];
-                    console.log("CID", cid);
-
-                    const filename = encodeURIComponent(item.data.name);
-                    console.log("Filename", filename);
-
-                    const filetype = filename.split(".")[1].toLocaleLowerCase();
-
-                    if (filetype === "pdf") {
-                      openPdfFileHandler(cid, filename);
-                    }
-                    // Adding handler for imgs and videos here
-                  }}
+                  // onClick={
+                    // open modal here
+                    // for view file call -> viewFileHandler(item.data.cid, item.data.name)
+                  // }
                 >
                   <div className={styles.fileTextHolder}>
                     <h1 className={item.filename}>{item.data.name}</h1>
