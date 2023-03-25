@@ -152,7 +152,7 @@ export default function MyFiles() {
 						onMouseLeave={handleMouseLeave}
 						onScroll={handleScroll}
 					>
-						{data.data.lengt < 1 ? (
+						{data != null ? (
 							data.data.map((item, index) => {
 								console.log(item.data);
 								return (

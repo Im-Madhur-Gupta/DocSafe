@@ -14,7 +14,7 @@ export default function PDF() {
                 height="75vh"
                 width='fit-content'
                 style={{ backgroundColor: "#2B2C30" }}
-                src={`https://${cid}.ipfs.w3s.link/${filename}.pdf`}
+                src={`ipfs://${cid}/${filename}`}
             />
         </Flex>
     );

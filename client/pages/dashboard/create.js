@@ -76,9 +76,9 @@ export default function Create() {
   async function handleSubmit() {
     const uris = await upload({ data: fileList });
     console.log(uris);
-    for (let i = 2; i < uris.length+2; i++) {
+    for (let i = 0; i < uris.length; i++) {
       console.log(uris[i]?.slice(7).split('/')[1]);
-      console.log( uris[i]?.split('/')[0]?.slice(7));
+      console.log(uris[i]?.slice(7).split('/')[0]);
       const res = await polybase
         .collection('Safes')
         .create([
@@ -87,8 +87,7 @@ export default function Create() {
           uris[i]?.slice(7).split('/')[1],
           uris[i]?.slice(7).split('/')[0]
         ]);
-
-      // console.log(res);
+      console.log(res);
     }
   }
 
