@@ -9,5 +9,5 @@ export default function PDF() {
     const router = useRouter()
     const { cid, filename } = router.query
 
-    return <CustomPDFViewer pdf={`https://${cid}.ipfs.w3s.link/${filename}.pdf`} />;
+    return <CustomPDFViewer pdf={`https://w3s.link/ipfs/${cid}/${filename}`} />;
 }
