@@ -13,6 +13,7 @@ import {
 	MenuList,
 	MenuItem,
 	Button,
+	Heading,
 } from "@chakra-ui/react";
 
 export default function MyFiles() {
@@ -134,11 +135,6 @@ export default function MyFiles() {
 		<Layout>
 			<div className={styles.container}>
 				<div className={styles.greetHolder}>
-					<div>
-						<button onClick={() => polybaseTest()}>Sign In</button>
-						<button onClick={() => auth.signOut()}>Sign Out</button>
-						<button onClick={() => UploadFile()}>Test btn</button>
-					</div>
 					<h1 className={styles.welcome}>Welcome!</h1>
 					<h3 className={styles.username}>@username</h3>
 				</div>
@@ -156,7 +152,7 @@ export default function MyFiles() {
 						onMouseLeave={handleMouseLeave}
 						onScroll={handleScroll}
 					>
-						{data != null &&
+						{data.data.lengt < 1 ? (
 							data.data.map((item, index) => {
 								console.log(item.data);
 								return (
@@ -202,7 +198,10 @@ export default function MyFiles() {
 										</div>
 									</motion.div>
 								);
-							})}
+							})
+						) : (
+							<Heading>No files found</Heading>
+						)}
 					</motion.div>
 				</div>
 			</div>
