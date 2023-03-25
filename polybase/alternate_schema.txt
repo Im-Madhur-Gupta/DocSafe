@@ -1,0 +1,50 @@
+@public
+collection Safes {
+  
+  id: string;
+  name: string; 
+  cid: string; 
+  sharedWith?: User[];
+
+  @delegate
+  owner:User;
+
+
+  constructor (id: string, owner:User, name: string, cid: string) {
+    this.id = id;
+    this.name = name;
+    this.cid = cid;
+    this.owner=owner;
+  }
+
+  @call(owner)
+  addSharedWith (sharedWith: User) {
+    this.sharedWith.push(sharedWith);
+  }
+
+
+  @call(owner)
+  del(){
+    selfdestruct();
+  }
+  
+}
+
+
+collection User {
+  id: string;
+
+  @delegate
+  @read
+  publicKey: PublicKey;
+
+  constructor () {
+    if (!ctx.publicKey) {
+      error('You must sign the txn');
+    }
+    this.id = ctx.publicKey.toHex(); 
+    this.publicKey = ctx.publicKey;
+  }
+}
+
+
