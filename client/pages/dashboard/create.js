@@ -1,7 +1,7 @@
 import Layout from "../../layout/layout";
 import styles from "../../styles/Create.module.css";
 import { AiOutlineCloudUpload } from "react-icons/ai";
-import { useEffect, useRef, useState } from "react";
+import {  useRef, useState } from "react";
 import {
   Tabs,
   TabList,
@@ -10,32 +10,26 @@ import {
   TabPanel,
   FormControl,
   FormLabel,
-  FormErrorMessage,
-  FormHelperText,
   Input,
   Button,
-  Stack,
   Tag,
   TagLabel,
   TagCloseButton,
-  useDisclosure,
 } from "@chakra-ui/react";
-import initializeNewUser from "../../utils/polybaseConnection";
-import { Polybase } from "@polybase/client";
-import { ethPersonalSign } from "@polybase/eth";
-import { Auth } from "@polybase/auth";
 import { usePolybase, useAuth, useCollection } from "@polybase/react";
 import { useStorageUpload } from "@thirdweb-dev/react";
+import { v4 as uuidv4 } from 'uuid';
+
 
 export default function Create() {
   const wrapperRef = useRef(null);
   const [fileList, setFileList] = useState([]);
   const [shareWith, setShareWith] = useState([]);
-  const { isOpen, onToggle } = useDisclosure();
   const [tabIndex, setTabIndex] = useState(0);
   const [fileName, setFileName] = useState("");
   const { mutateAsync: upload } = useStorageUpload();
-  const { auth, state } = useAuth();
+  const { state } = useAuth();
+  const polybase = usePolybase();
 
   function handleNextTab() {
     setTabIndex(1);
@@ -82,46 +76,26 @@ export default function Create() {
   async function handleSubmit() {
     const uris = await upload({ data: fileList });
     console.log(uris);
-    for (let i = 0; i < uris.length; i++) {
+    for (let i = 2; i < uris.length+2; i++) {
+      console.log(uris[i]?.slice(7).split('/')[1]);
+      console.log( uris[i]?.split('/')[0]?.slice(7));
       const res = await polybase
-        .collection("Safes")
+        .collection('Safes')
         .create([
-          `${data.data.length}`,
-          state.userId,
-          `${uris[i].slice(uris[i].lastIndexOf("/") + 1)}`,
-          `${uris[i].slice(7)}`,
+          uuidv4(),
+          polybase.collection('User').record(state.publicKey),
+          uris[i]?.slice(7).split('/')[1],
+          uris[i]?.slice(7).split('/')[0]
         ]);
 
-      console.log(res);
+      // console.log(res);
     }
   }
 
   function handleAddDetails() {}
 
-  useEffect(() => {
-    console.log(fileList);
-  }, [fileList]);
 
-  const polybase = usePolybase();
-
-  // const { auth, state, loading } = useAuth();
-
-  const { data, error, dataLoading } = useCollection(
-    polybase.collection("Safes")
-    //   .where("account", "==", `0x6e7F1a7d1Bac9c7784c7C7Cdb098A727F62E95c7`)
-  );
-
-  useEffect(() => {
-    (async () => {
-      console.log(data);
-    })();
-  }, [data]);
-
-  // Not needed for on create page
-  // async function polybaseTest() {
-  // 	console.log("Polybase test");
-  // 	await auth.signIn();
-  // }
+ 
 
   async function UploadFile() {
     console.log(data.data);
@@ -131,11 +105,6 @@ export default function Create() {
     <Layout>
       <div className={styles.container}>
         <div className={styles.tabHoldler}>
-          <div>
-            <button onClick={() => polybaseTest()}>Sign In</button>
-            <button onClick={() => auth.signOut()}>Sign Out</button>
-            <button onClick={() => UploadFile()}>Test btn</button>
-          </div>
           <Tabs
             index={tabIndex}
             onChange={setTabIndex}

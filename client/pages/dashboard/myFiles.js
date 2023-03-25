@@ -14,7 +14,7 @@ import {
   useIsAuthenticated,
   useCollection,
 } from "@polybase/react";
-
+import {BsThreeDots, BsTreeeDots} from "react-icons/bs";
 const dummyFile = [
   {
     filename: "file1.xyz",
@@ -236,8 +236,8 @@ export default function MyFiles() {
             onMouseLeave={handleMouseLeave}
             onScroll={handleScroll}
           >
-            {data != null
-              ? data.data.map((item, index) => (
+            {dummyFile != null
+              ? dummyFile.map((item, index) => (
                 <motion.div
                   key={index}
                   className={styles.filebox}
@@ -251,8 +251,8 @@ export default function MyFiles() {
                   }
                 >
                   <div className={styles.fileTextHolder}>
-                    <h1 className={item.filename}>{item.data.name}</h1>
-                    <h3 className={item.filesize}>{item.data.id}</h3>
+                    <h1 className={item.filename}>{item.filename}</h1>
+                    <h3 className={item.filesize}><BsThreeDots/></h3>
                   </div>
                 </motion.div>
               ))
