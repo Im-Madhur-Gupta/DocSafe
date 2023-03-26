@@ -14,7 +14,7 @@ contract FileManager {
     mapping (uint256 => mapping (address => bool)) allowed;
     uint256 private safeCount;
 
-    function createFolder(string memory _name, string memory _cid) public {
+    function createSafe(string memory _name, string memory _cid) public {
         safeCount++;
         safes[safeCount] = Safe(_name, _cid, msg.sender);
     }
@@ -41,7 +41,7 @@ contract FileManager {
 
     }
 
-    function getFolderSharedWith(address _user) public view returns (Safe[] memory) {
+    function getSafesSharedWith(address _user) public view returns (Safe[] memory) {
         Safe[] memory sharedSafes;
         uint256 count = 0;
 
@@ -55,7 +55,7 @@ contract FileManager {
         return sharedSafes;
     }
 
-    function getUserFolders(address _user) public view returns(Safe[] memory) {
+    function getUserSafes(address _user) public view returns(Safe[] memory) {
         Safe[] memory userSafes;
         uint256 count = 0;
 
