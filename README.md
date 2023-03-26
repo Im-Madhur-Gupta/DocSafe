@@ -1,12 +1,12 @@
-<h1 align="center">PolySafe</h1>
+<h1 align="center">DocSafe</h1>
 <p align="center">
-  <img width="572" alt="poly safe logo" src="https://user-images.githubusercontent.com/76112446/227716252-dde961f7-7dcd-41af-9f19-4ed06edeeec7.png">
+  <img width="400" alt="docsafe-logo" src="https://user-images.githubusercontent.com/76112446/227755336-93c8706e-01bd-4bb8-ae48-2a750958195d.png">
 </p>
-PolySafe is a web application that allows users to create decentralized safes for storing and sharing files. The safes are secured with encryption and can only be accessed by authorized parties.
+DocSafe is a platform that allows users to create decentralized safes for storing and sharing files. The safes are secured with encryption and can only be accessed by authorized parties.
 
 ## Features
 - Create a new safe
-- Upload files to a safe
+- Upload encrypted files to a safe
 - Share safe with specific users
 - Grant or revoke access to a safe for specific user
 - Download files from a safe
@@ -14,7 +14,7 @@ PolySafe is a web application that allows users to create decentralized safes fo
 - Delete a safe
 
 ## How it works
-Poly-Safe uses **IPFS** to make sure that the files stored in the safes are always available and **Polybase** so files are encrypted, can only be accessed by authorized adresses. 
+DocSafe ensures that the encrypted files stored in the safes are easily accessible by utilizing the **IPFS**. Additionally, it employs a smart contract to store the safe's information, thereby ensuring that the safes can only be accessed by authorized addresses.
 
 ## Potential use cases
 
@@ -30,7 +30,4 @@ Poly-Safe uses **IPFS** to make sure that the files stored in the safes are alwa
 - Next.js
 - Ethers.js
 - IPFS
-- Polybase
-
-## License
-Poly-Safe is released under the MIT License
+- Mantle
