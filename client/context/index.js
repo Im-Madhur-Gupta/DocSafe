@@ -125,6 +125,24 @@ export function StateContextProvider({ children }) {
 		}
 	}
 
+	async function fetchSafesForNFT(nftAddress){
+		if(typeof window.ethereum !=="undefined"){
+			const provider = new ethers.providers.Web3Provider(window.ethereum);
+			const signer = provider.getSigner();
+			const contract = new ethers.Contract(
+				contractAddress,
+				contractABI,
+				signer,
+			);
+			try{
+				const res = await contract.getSafesForNFT(nftAddress);
+				return res;
+			}catch(err){
+				console.log("Error",err);
+			}
+		}
+	}
+
 	async function fetchUserSafes(userAddress) {
 		let provider;
 		if (process.env.NEXT_PUBLIC_ENVIRONMENT === "local") {
@@ -176,6 +194,7 @@ export function StateContextProvider({ children }) {
 				addAccessNFT,
 				fetchUserSafes,
 				fetchSafesSharedWithUser,
+				fetchSafesForNFT,
 			}}
 		>
 			{children}
