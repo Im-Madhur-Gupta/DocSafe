@@ -21,12 +21,10 @@
 .title{
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 44px;
-    line-height: 78px;
-    /* identical to box height */
     color: #FFFFFF;
     padding-left: 30px;
-    margin-top: 15px;
-    margin-bottom: 30px;
+    margin-top: 20px;
+    margin-bottom: 2px;
 }

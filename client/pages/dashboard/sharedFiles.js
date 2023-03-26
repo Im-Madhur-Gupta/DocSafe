@@ -7,6 +7,7 @@ import {
 	Th,
 	Td,
 	TableContainer,
+	Text,
 } from "@chakra-ui/react";
 import styles from "../../styles/Shared.module.css";
 import { useEffect, useState } from "react";
@@ -67,21 +68,24 @@ export default function SharedFiles() {
 		<Layout>
 			<div className={styles.container}>
 				<div className={styles.tableHolder}>
-					<h1 className={styles.title}>Shared Files</h1>
-					<TableContainer>
-						<Table variant="simple" fontSize={25}>
+					<h1 className={styles.title}>Shared with me</h1>
+					<Text color="white" paddingLeft="30px" fontSize={22} marginBottom={10}>This page displays the files that have been shared with you.</Text>
+					<TableContainer marginX="2rem">
+						<Table color="white" variant="simple" fontSize={25}>
 							<Thead>
 								<Tr>
 									<Th
 										fontSize={30}
 										textTransform={"capitalize"}
 										fontFamily={"sans-serif"}
+										color="white"
 									>
 										File Name
 									</Th>
 									<Th
 										fontSize={30}
 										textTransform={"capitalize"}
+										color="white"
 									>
 										Shared By
 									</Th>
@@ -99,15 +103,16 @@ export default function SharedFiles() {
 														item[3][x]
 													)
 												}
+												color="white"
 											>
-												<Td>{item[3][x]}</Td>
-												<Td>{item[2]}</Td>
+												<Td color="white">{item[3][x]}</Td>
+												<Td color="white">{item[2]}</Td>
 											</Tr>
 										);
 									}
-									<Tr key={index}>
-										<Td>{item.filename}</Td>
-										<Td>{item.sender}</Td>
+									<Tr key={index} color="white">
+										<Td color="white">{item.filename}</Td>
+										<Td color="white">{item.sender}</Td>
 									</Tr>;
 								})}
 							</Tbody>
