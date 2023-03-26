@@ -3,11 +3,14 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { Button, Image } from "@chakra-ui/react";
+import { useAddress } from "@thirdweb-dev/react";
+import { useEffect } from "react";
 
 export default function Sidebar() {
+	const address = useAddress();
+
 	const router = useRouter();
 	const path = router.asPath.split("/").pop();
-
 
 	return (
 		<div className={styles.container}>
@@ -77,7 +80,7 @@ export default function Sidebar() {
 			<div className={styles.profileContainer}>
 				<div className={styles.profile}>
 					<div className={styles.profileIcon}></div>
-					<div className={styles.profileName}>@username</div>
+					<div className={styles.profileName}>{address?.substring(0,10)+"..."}</div>
 				</div>
 				<div className={styles.logout}>
 					<Button
