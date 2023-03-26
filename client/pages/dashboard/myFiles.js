@@ -14,6 +14,7 @@ import {
 	Button,
 	Heading,
 } from "@chakra-ui/react";
+import { useStateContext } from "../../context";
 
 export default function MyFiles() {
 	const ref = useRef(null);
@@ -21,6 +22,22 @@ export default function MyFiles() {
 	const [scrollLeft, setScrollLeft] = useState(0);
 	const [trackMouse, setTrackMouse] = useState(false);
 	const [animationComplete, setAnimationComplete] = useState(true);
+	const [files, setFiles] = useState([]);
+	const { address, addAllowed, fetchUserSafes } = useStateContext();
+
+	useEffect(() => {
+		if (address) {
+			fetchUserSafes(address)
+				.then((res) => {
+					setFiles(res);
+				})
+				.catch((err) => {
+					console.log("Error", err);
+				});
+		}
+	}, []);
+
+	console.log("files", files);
 
 	const router = useRouter();
 	const x = useMotionValue(0);
@@ -130,7 +147,7 @@ export default function MyFiles() {
 					<div className={styles.myFilesTitleHolder}>
 						<h1 className={styles.myFilesTitle}>My Files</h1>
 					</div>
-					{/* <motion.div
+					<motion.div
 						className={styles.myFileHolderParent}
 						whileTap={{ cursor: "grabbing" }}
 						ref={ref}
@@ -140,57 +157,67 @@ export default function MyFiles() {
 						onMouseLeave={handleMouseLeave}
 						onScroll={handleScroll}
 					>
-						{data != null ? (
-							data.data.map((item, index) => {
-								console.log(item.data);
-								return (
-									<motion.div
-										key={index}
-										className={styles.filebox}
-										style={{
-											userSelect: trackMouse
-												? "none"
-												: "auto",
-										}}
-									>
-										<div className={styles.fileTextHolder}>
-											<Tag
-												size="lg"
-												borderRadius="full"
-												variant="solid"
-												bg="transparent"
+						{files.length > 0 ? (
+							files.map((item, index) => {
+								for (let x = 0; x < item[3].length; x++) {
+									console.log("Item", item[3][x]);
+									return (
+										<motion.div
+											key={index}
+											className={styles.filebox}
+											style={{
+												userSelect: trackMouse
+													? "none"
+													: "auto",
+											}}
+										>
+											<div
+												className={
+													styles.fileTextHolder
+												}
 											>
-												<TagLabel>
-													{item.data.name}
-												</TagLabel>
-											</Tag>
-											<Menu>
-												<MenuButton>
-													<BsThreeDots />
-												</MenuButton>
-												<MenuList>
-													<MenuItem
-														onClick={() =>
-															viewFileHandler(
-																item.data.cid,
-																item.data.name
-															)
-														}
-													>
-														View
-													</MenuItem>
-													<MenuItem>Share</MenuItem>
-													<MenuItem>Delete</MenuItem>
-												</MenuList>
-											</Menu>
-										</div>
-									</motion.div>
-								);
+												<Tag
+													size="lg"
+													borderRadius="full"
+													variant="solid"
+													bg="transparent"
+												>
+													<TagLabel>
+														{item[3][x]}
+													</TagLabel>
+												</Tag>
+												<Menu>
+													<MenuButton>
+														<BsThreeDots />
+													</MenuButton>
+													<MenuList>
+														<MenuItem
+															onClick={() =>
+																viewFileHandler(
+																	item[1],
+																	item[3][x]
+																)
+															}
+														>
+															View
+														</MenuItem>
+														<MenuItem>
+															Share
+														</MenuItem>
+														<MenuItem>
+															Delete
+														</MenuItem>
+													</MenuList>
+												</Menu>
+											</div>
+										</motion.div>
+									);
+								}
 							})
 						) : (
 							<Heading>No files found</Heading>
 						)}
-					</motion.div> */}
+					</motion.div>
 				</div>
 			</div>
 		</Layout>

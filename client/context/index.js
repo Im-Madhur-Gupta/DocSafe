@@ -40,7 +40,7 @@ export function StateContextProvider({ children }) {
 				signer
 			);
 			try {
-				const res = await contract.addAllowed(fileName, userAddress);
+				const res = await contract.addAllowed(safeName, userAddress);
 				await provider.waitForTransaction(res.hash);
 				console.log("Res", res);
 			} catch (err) {
@@ -59,7 +59,7 @@ export function StateContextProvider({ children }) {
 				signer
 			);
 			try {
-				const res = await contract.removeAllowed(fileName, userAddress);
+				const res = await contract.removeAllowed(safeName, userAddress);
 				await provider.waitForTransaction(res.hash);
 				console.log("Res", res);
 			} catch (err) {

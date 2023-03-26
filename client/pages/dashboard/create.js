@@ -1,7 +1,8 @@
 import Layout from "../../layout/layout";
 import styles from "../../styles/Create.module.css";
 import { AiOutlineCloudUpload } from "react-icons/ai";
-import { useContext, useRef, useState } from "react";
+import {  useRef, useState } from "react";
+import { useRouter } from "next/router";
 import {
 	Tabs,
 	TabList,
@@ -28,8 +29,9 @@ export default function Create() {
 	const [tabIndex, setTabIndex] = useState(0);
 	const [cid, setCid] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
-	const { createSafe } = useStateContext();
+	const { createSafe,addAllowed } = useStateContext();
 	const { mutateAsync: upload } = useStorageUpload();
+	const router = useRouter();
 
 	function handleNextTab() {
 		setTabIndex(1);
@@ -84,15 +86,16 @@ export default function Create() {
 			fList.push(uris[x].slice(7).split("/")[1]);
 		}
 		setFileList(fList);
-		await createSafe(safeName,cid,fileList);
 		setIsLoading(false);
 		handleNextTab();
 	}
 
 	async function handleAddDetails() {
 		setIsLoading(true);
+		await createSafe(safeName,cid,fileList);
 		await addAllowed(safeName,shareWith[0]);
 		setIsLoading(false);
+		router.push("/dashboard/myFiles");
 	}
 
 	if (isLoading) {
