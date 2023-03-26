@@ -12,7 +12,6 @@ export default function Sidebar() {
 	return (
 		<div className={styles.container}>
 			<div>
-				wwewe
 				<div className={styles.title}>
 					<Image width="4rem" src="/favicon.ico" marginRight={2}/>
 					DocSafe
@@ -35,6 +34,7 @@ export default function Sidebar() {
 									My Files
 								</div>
 							</Link>
+
 							<Link href="/dashboard/sharedFiles">
 								<div
 									className={
@@ -46,17 +46,7 @@ export default function Sidebar() {
 									Shared with me
 								</div>
 							</Link>
-							<Link href="/dashboard/create">
-								<div
-									className={
-										path === "create"
-											? styles.selectedLink
-											: styles.link
-									}
-								>
-									Add new files
-								</div>
-							</Link>
+
 							<Link href="/dashboard/accessviaNFT">
 								<div
 									className={
@@ -66,6 +56,18 @@ export default function Sidebar() {
 									}
 								>
 									Access via NFT
+								</div>
+							</Link>
+
+							<Link href="/dashboard/create">
+								<div
+									className={
+										path === "create"
+											? styles.selectedLink
+											: styles.link
+									}
+								>
+									Add new files
 								</div>
 							</Link>
 						</div>
