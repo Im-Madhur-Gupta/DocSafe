@@ -129,6 +129,33 @@ contract FileManager {
         }
     }
 
+    function deleteFileFromSafe(
+        string memory _name,
+        string memory _fileName
+    ) public {
+        for (uint256 i = 1; i <= safeCount; i++) {
+            if (
+                keccak256(abi.encodePacked(safes[i].name)) ==
+                keccak256(abi.encodePacked(_name))
+            ) {
+                require(
+                    msg.sender == safes[i].owner,
+                    "Only owner can delete file"
+                );
+                for (uint256 j = 0; j < safes[i].fileNames.length; j++) {
+                    if (
+                        keccak256(
+                            abi.encodePacked(safes[i].fileNames[j])
+                        ) == keccak256(abi.encodePacked(_fileName))
+                    ) {
+                        delete safes[i].fileNames[j];
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
     function getSafesForNFT(address NFT) public view returns(Safe[] memory) {
         require(
             IERC721(NFT).balanceOf(msg.sender) > 0,
