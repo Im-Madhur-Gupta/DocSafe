@@ -1,11 +1,8 @@
 import { useContext, createContext } from "react";
 import {
 	useAddress,
-	useContract,
-	useMetamask,
-	useContractWrite,
-	useContractRead,
 } from "@thirdweb-dev/react";
+import { ethers } from "ethers";
 
 
 const StateContext = createContext();
@@ -13,13 +10,12 @@ const StateContext = createContext();
 export function StateContextProvider({ children }) {
 
     const address = useAddress();
-    const connect = useMetamask();
+    const contractAddress=""
 
     return (
         <StateContext.Provider
             value={{
                 address,
-                connect,
             }}
         >
             {children}

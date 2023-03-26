@@ -8,15 +8,16 @@ contract FileManager {
         string name;
         string cid;
         address owner;
+        string[] fileNames;
     }
 
     mapping (uint256 => Safe) safes;
     mapping (uint256 => mapping (address => bool)) allowed;
     uint256 private safeCount;
 
-    function createSafe(string memory _name, string memory _cid) public {
+    function createSafe(string memory _name, string memory _cid,string[] memory fileNames) public {
         safeCount++;
-        safes[safeCount] = Safe(_name, _cid, msg.sender);
+        safes[safeCount] = Safe(_name, _cid, msg.sender,fileNames);
     }
 
     function addAllowed(string memory _name, address _allowed) public {

@@ -5,6 +5,7 @@
 // will compile your contracts, add the Hardhat Runtime Environment's members to the
 // global scope, and execute the script.
 const hre = require("hardhat");
+const fs = require("fs");
 
 async function main() {
 
@@ -16,6 +17,11 @@ async function main() {
   console.log(
     `fileManager deployed to ${fileManager.address}`
   );
+
+  fs.writeFileSync(
+    "../client/constants/index.js",
+    `export const fileManagerAddress = "${fileManager.address}"`
+  )
 }
 
 // We recommend this pattern to be able to use async/await everywhere

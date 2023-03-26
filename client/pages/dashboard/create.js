@@ -16,9 +16,7 @@ import {
   TagLabel,
   TagCloseButton,
 } from "@chakra-ui/react";
-import { usePolybase, useAuth, useCollection } from "@polybase/react";
-import { useStorageUpload } from "@thirdweb-dev/react";
-import { v4 as uuidv4 } from 'uuid';
+import { useStorageUpload,Web3Button  } from "@thirdweb-dev/react";
 
 
 export default function Create() {
@@ -27,9 +25,6 @@ export default function Create() {
   const [shareWith, setShareWith] = useState([]);
   const [tabIndex, setTabIndex] = useState(0);
   const [fileName, setFileName] = useState("");
-  const { mutateAsync: upload } = useStorageUpload();
-  const { state } = useAuth();
-  const polybase = usePolybase();
 
   function handleNextTab() {
     setTabIndex(1);
@@ -74,23 +69,8 @@ export default function Create() {
   }
 
   async function handleSubmit() {
-
     const uris = await upload({ data: fileList });
-    
     console.log(uris);
-    for (let i = 0; i < uris.length; i++) {
-      console.log(uris[i]?.slice(7).split('/')[1]);
-      console.log(uris[i]?.slice(7).split('/')[0]);
-      const res = await polybase
-        .collection('Safes')
-        .create([
-          uuidv4(),
-          polybase.collection('User').record(state.publicKey),
-          uris[i]?.slice(7).split('/')[1],
-          uris[i]?.slice(7).split('/')[0]
-        ]);
-      console.log(res);
-    }
   }
 
   function handleAddDetails() {}
