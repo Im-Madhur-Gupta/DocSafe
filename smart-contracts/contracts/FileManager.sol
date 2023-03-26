@@ -13,7 +13,7 @@ contract FileManager {
 
     mapping (uint256 => Safe) private safes;
     mapping (uint256 => mapping (address => bool)) allowed;
-    uint256 private safeCount;
+    uint256 public  safeCount;
 
     function createSafe(string memory _name, string memory _cid,string[] memory fileNames) public {
         safeCount++;
@@ -42,11 +42,16 @@ contract FileManager {
 
     }
 
-    function getSafesSharedWith(address _user) public view returns (Safe[] memory) {
-
-        Safe[] memory sharedSafes;
+   function getSafesSharedWith(address _user) public view returns (Safe[] memory) {
         uint256 count = 0;
+        for(uint256 i = 1; i <= safeCount; i++) {
+            if(allowed[i][_user]) {
+                count++;
+            }
+        }
 
+        Safe[] memory sharedSafes = new Safe[](count);
+        count = 0;
         for(uint256 i = 1; i <= safeCount; i++) {
             if(allowed[i][_user]) {
                 sharedSafes[count] = safes[i];
@@ -58,10 +63,15 @@ contract FileManager {
     }
 
     function getUserSafes(address _user) public view returns(Safe[] memory) {
-
-        Safe[] memory userSafes;
         uint256 count = 0;
+        for(uint256 i = 1; i <= safeCount; i++) {
+            if(safes[i].owner == _user) {
+                count++;
+            }
+        }
 
+        Safe[] memory userSafes = new Safe[](count);
+        count = 0;
         for(uint256 i = 1; i <= safeCount; i++) {
             if(safes[i].owner == _user) {
                 userSafes[count] = safes[i];
