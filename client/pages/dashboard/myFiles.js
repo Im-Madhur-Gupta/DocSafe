@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import Layout from "../../layout/layout";
 import styles from "../../styles/MyFile.module.css";
 import { animate, motion, useMotionValue, useScroll } from "framer-motion";
-import { usePolybase, useAuth, useCollection } from "@polybase/react";
 import { BsThreeDots } from "react-icons/bs";
 import {
 	Tag,
@@ -22,9 +21,6 @@ export default function MyFiles() {
 	const [scrollLeft, setScrollLeft] = useState(0);
 	const [trackMouse, setTrackMouse] = useState(false);
 	const [animationComplete, setAnimationComplete] = useState(true);
-	const [user, setUser] = useState(null);
-	const { state } = useAuth();
-	const polybase = usePolybase();
 
 	const router = useRouter();
 	const x = useMotionValue(0);
@@ -123,14 +119,6 @@ export default function MyFiles() {
 		console.log(e.target);
 	};
 
-	// console.log(state.publicKey);
-	// console.log(polybase.collection("User").record(state.publicKey).get());
-
-	const { data, error, dataLoading } = useCollection(
-		polybase.collection("Safes")
-		// .where("account", "==", `0x6e7F1a7d1Bac9c7784c7C7Cdb098A727F62E95c7`)
-	);
-
 	return (
 		<Layout>
 			<div className={styles.container}>
@@ -142,7 +130,7 @@ export default function MyFiles() {
 					<div className={styles.myFilesTitleHolder}>
 						<h1 className={styles.myFilesTitle}>My Files</h1>
 					</div>
-					<motion.div
+					{/* <motion.div
 						className={styles.myFileHolderParent}
 						whileTap={{ cursor: "grabbing" }}
 						ref={ref}
@@ -202,7 +190,7 @@ export default function MyFiles() {
 						) : (
 							<Heading>No files found</Heading>
 						)}
-					</motion.div>
+					</motion.div> */}
 				</div>
 			</div>
 		</Layout>
