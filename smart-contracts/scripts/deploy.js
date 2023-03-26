@@ -9,7 +9,7 @@ const hre = require("hardhat");
 async function main() {
 
   const FileManager = await hre.ethers.getContractFactory("FileManager");
-  const fileManager = await FileManager.deploy(unlockTime, { value: lockedAmount });
+  const fileManager = await FileManager.deploy();
 
   await fileManager.deployed();
 

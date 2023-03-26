@@ -1,31 +1,29 @@
-// SPDX-License-Identifier: UNLICENSED
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
-// Uncomment this line to use console.log
-// import "hardhat/console.sol";
 
 contract FileManager {
 
-    struct Folder {
+    struct Safe {
         string name;
         string cid;
         address owner;
     }
 
-    mapping (uint256 => Folder) folders;
+    mapping (uint256 => Safe) safes;
     mapping (uint256 => mapping (address => bool)) allowed;
-    uint256 private folderCount;
+    uint256 private safeCount;
 
     function createFolder(string memory _name, string memory _cid) public {
-        folderCount++;
-        folders[folderCount] = Folder(_name, _cid, msg.sender);
+        safeCount++;
+        safes[safeCount] = Safe(_name, _cid, msg.sender);
     }
 
     function addAllowed(string memory _name, address _allowed) public {
         
-        for(uint256 i = 1; i <= folderCount; i++) {
-            if (keccak256(abi.encodePacked(folders[i].name)) == keccak256(abi.encodePacked(_name))) {
-                require(msg.sender == folders[i].owner, "Only owner can add allowed");
+        for(uint256 i = 1; i <= safeCount; i++) {
+            if (keccak256(abi.encodePacked(safes[i].name)) == keccak256(abi.encodePacked(_name))) {
+                require(msg.sender == safes[i].owner, "Only owner can add allowed");
                 allowed[i][_allowed] = true;
             }
         }
@@ -34,41 +32,41 @@ contract FileManager {
 
     function removeAllowed(string memory _name, address _allowed) public {
 
-        for(uint256 i = 1; i <= folderCount; i++) {
-            if (keccak256(abi.encodePacked(folders[i].name)) == keccak256(abi.encodePacked(_name))) {
-                require(msg.sender == folders[i].owner, "Only owner can remove allowed");
+        for(uint256 i = 1; i <= safeCount; i++) {
+            if (keccak256(abi.encodePacked(safes[i].name)) == keccak256(abi.encodePacked(_name))) {
+                require(msg.sender == safes[i].owner, "Only owner can remove allowed");
                 allowed[i][_allowed] = false;
             }
         }
 
     }
 
-    function getFolderSharedWith(address _user) public view returns (Folder[] memory) {
-        Folder[] memory sharedFolders;
+    function getFolderSharedWith(address _user) public view returns (Safe[] memory) {
+        Safe[] memory sharedSafes;
         uint256 count = 0;
 
-        for(uint256 i = 1; i <= folderCount; i++) {
+        for(uint256 i = 1; i <= safeCount; i++) {
             if(allowed[i][_user]) {
-                sharedFolders[count] = folders[i];
+                sharedSafes[count] = safes[i];
                 count++;
             }
         }
 
-        return sharedFolders;
+        return sharedSafes;
     }
 
-    function getUserFolders(address _user) public view returns(Folder[] memory) {
-        Folder[] memory userFolders;
+    function getUserFolders(address _user) public view returns(Safe[] memory) {
+        Safe[] memory userSafes;
         uint256 count = 0;
 
-        for(uint256 i = 1; i <= folderCount; i++) {
-            if(folders[i].owner == _user) {
-                userFolders[count] = folders[i];
+        for(uint256 i = 1; i <= safeCount; i++) {
+            if(safes[i].owner == _user) {
+                userSafes[count] = safes[i];
                 count++;
             }
         }
 
-        return userFolders;
+        return userSafes;
     }
 }
 
