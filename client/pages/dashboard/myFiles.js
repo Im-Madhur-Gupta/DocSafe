@@ -183,6 +183,7 @@ export default function MyFiles() {
 													borderRadius="full"
 													variant="solid"
 													bg="transparent"
+													color="white"
 												>
 													<TagLabel>
 														{item[4][x]}
@@ -190,7 +191,7 @@ export default function MyFiles() {
 												</Tag>
 												<Menu>
 													<MenuButton>
-														<BsThreeDots />
+														<BsThreeDots color="white" />
 													</MenuButton>
 													<MenuList>
 														<MenuItem
@@ -214,7 +215,7 @@ export default function MyFiles() {
 								}
 							})
 						) : (
-							<Heading>No files found</Heading>
+							<Heading color="white">No files found</Heading>
 						)}
 					</motion.div>
 				</div>
