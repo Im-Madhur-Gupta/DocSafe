@@ -80,7 +80,7 @@ export default function Sidebar() {
 			<div className={styles.profileContainer}>
 				<div className={styles.profile}>
 					<div className={styles.profileIcon}></div>
-					<div className={styles.profileName}>{address.substring(0,10)+"..."}</div>
+					<div className={styles.profileName}>{address?.substring(0,10)+"..."}</div>
 				</div>
 				<div className={styles.logout}>
 					<Button
