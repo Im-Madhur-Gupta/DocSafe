@@ -79,8 +79,7 @@ export default function SharedFiles() {
 						fontSize={22}
 						marginBottom={10}
 					>
-						This page displays the files that have been shared with
-						you.
+						Files that have been shared with you.
 					</Text>
 					<TableContainer marginX="2rem">
 						<Table color="white" variant="simple" fontSize={25}>
