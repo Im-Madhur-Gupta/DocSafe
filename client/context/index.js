@@ -68,6 +68,25 @@ export function StateContextProvider({ children }) {
 		}
 	}
 
+	async function addAccessNFT(safeName, nftAddress) {
+		if (typeof window.ethereum !== "undefined") {
+			const provider = new ethers.providers.Web3Provider(window.ethereum);
+			const signer = provider.getSigner();
+			const contract = new ethers.Contract(
+				contractAddress,
+				contractABI,
+				signer
+			);
+			try {
+				const res = await contract.addAccessNFT(safeName, nftAddress);
+				await provider.waitForTransaction(res.hash);
+				console.log("Res", res);
+			} catch (err) {
+				console.log("Error", err);
+			}
+		}
+	}
+
     async function deleteSafe(safeName){
         if(typeof window.ethereum!=="undefined"){
             const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -86,6 +105,43 @@ export function StateContextProvider({ children }) {
             }
         }
     }
+
+	async function deleteFileFromSafe(safeName,fileName){
+		if(typeof window.ethereum !=="undefined"){
+			const provider = new ethers.providers.Web3Provider(window.ethereum);
+			const signer = provider.getSigner();
+			const contract = new ethers.Contract(
+				contractAddress,
+				contractABI,
+				signer,
+			);
+			try{
+				const res = await contract.deleteFileFromSafe(safeName,fileName);
+				await provider.waitForTransaction(res.hash);
+				console.log("Res", res);
+			}catch(err){
+				console.log("Error",err);
+			}
+		}
+	}
+
+	async function fetchSafesForNFT(nftAddress){
+		if(typeof window.ethereum !=="undefined"){
+			const provider = new ethers.providers.Web3Provider(window.ethereum);
+			const signer = provider.getSigner();
+			const contract = new ethers.Contract(
+				contractAddress,
+				contractABI,
+				signer,
+			);
+			try{
+				const res = await contract.getSafesForNFT(nftAddress);
+				return res;
+			}catch(err){
+				console.log("Error",err);
+			}
+		}
+	}
 
 	async function fetchUserSafes(userAddress) {
 		let provider;
@@ -134,8 +190,11 @@ export function StateContextProvider({ children }) {
 				addAllowed,
 				removeAllowed,
                 deleteSafe,
+				deleteFileFromSafe,
+				addAccessNFT,
 				fetchUserSafes,
 				fetchSafesSharedWithUser,
+				fetchSafesForNFT,
 			}}
 		>
 			{children}
