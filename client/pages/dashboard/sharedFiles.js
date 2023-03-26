@@ -12,15 +12,19 @@ import {
 import styles from "../../styles/Shared.module.css";
 import { useEffect, useState } from "react";
 import { useStateContext } from "../../context";
+import { useRouter } from "next/router";
+
 
 export default function SharedFiles() {
 	const [fileList, setFileList] = useState([]);
 	const { address, fetchSafesSharedWithUser } = useStateContext();
+	const router = useRouter();
 
 	useEffect(() => {
 		if (address) {
 			fetchSafesSharedWithUser(address)
 				.then((res) => {
+					console.log(res);
 					setFileList(res);
 				})
 				.catch((err) => {
@@ -69,7 +73,15 @@ export default function SharedFiles() {
 			<div className={styles.container}>
 				<div className={styles.tableHolder}>
 					<h1 className={styles.title}>Shared with me</h1>
-					<Text color="white" paddingLeft="30px" fontSize={22} marginBottom={10}>This page displays the files that have been shared with you.</Text>
+					<Text
+						color="white"
+						paddingLeft="30px"
+						fontSize={22}
+						marginBottom={10}
+					>
+						This page displays the files that have been shared with
+						you.
+					</Text>
 					<TableContainer marginX="2rem">
 						<Table color="white" variant="simple" fontSize={25}>
 							<Thead>
@@ -92,29 +104,40 @@ export default function SharedFiles() {
 								</Tr>
 							</Thead>
 							<Tbody>
-								{fileList?.length> 0 && fileList.map((item, index) => {
-									for (let x = 0; x < item[3].length; x++) {
-										return (
-											<Tr
-												key={index}
-												onClick={() =>
-													viewFileHandler(
-														item[1],
-														item[3][x]
-													)
-												}
-												color="white"
-											>
-												<Td color="white">{item[3][x]}</Td>
-												<Td color="white">{item[2]}</Td>
-											</Tr>
-										);
-									}
-									<Tr key={index} color="white">
-										<Td color="white">{item.filename}</Td>
-										<Td color="white">{item.sender}</Td>
-									</Tr>;
-								})}
+								{fileList?.length > 0 &&
+									fileList.map((item, index) => {
+										for (
+											let x = 0;
+											x < item[3].length;
+											x++
+										) {
+											return (
+												<Tr
+													key={index}
+													onClick={() =>
+														viewFileHandler(
+															item[1],
+															item[4][x]
+														)
+													}
+													color="white"
+												>
+													<Td color="white">
+														{item[4][x]}
+													</Td>
+													<Td color="white">
+														{item[2]}
+													</Td>
+												</Tr>
+											);
+										}
+										<Tr key={index} color="white">
+											<Td color="white">
+												{item.filename}
+											</Td>
+											<Td color="white">{item.sender}</Td>
+										</Tr>;
+									})}
 							</Tbody>
 						</Table>
 					</TableContainer>
