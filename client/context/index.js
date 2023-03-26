@@ -68,6 +68,25 @@ export function StateContextProvider({ children }) {
 		}
 	}
 
+	async function addAccessNFT(safeName, nftAddress) {
+		if (typeof window.ethereum !== "undefined") {
+			const provider = new ethers.providers.Web3Provider(window.ethereum);
+			const signer = provider.getSigner();
+			const contract = new ethers.Contract(
+				contractAddress,
+				contractABI,
+				signer
+			);
+			try {
+				const res = await contract.addAccessNFT(safeName, nftAddress);
+				await provider.waitForTransaction(res.hash);
+				console.log("Res", res);
+			} catch (err) {
+				console.log("Error", err);
+			}
+		}
+	}
+
     async function deleteSafe(safeName){
         if(typeof window.ethereum!=="undefined"){
             const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -154,6 +173,7 @@ export function StateContextProvider({ children }) {
 				removeAllowed,
                 deleteSafe,
 				deleteFileFromSafe,
+				addAccessNFT,
 				fetchUserSafes,
 				fetchSafesSharedWithUser,
 			}}
