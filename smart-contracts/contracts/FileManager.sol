@@ -81,5 +81,17 @@ contract FileManager {
 
         return userSafes;
     }
+
+    function deleteSafe(string memory _name) public {
+        for (uint256 i = 1; i <= safeCount; i++) {
+            if (keccak256(abi.encodePacked(safes[i].name)) == keccak256(abi.encodePacked(_name))) {
+                require(msg.sender == safes[i].owner, "Only owner can delete safe");
+                delete safes[i];
+                safeCount--;
+                return;
+            }
+        }
+    }
+
 }
 

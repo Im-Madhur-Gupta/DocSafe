@@ -49,7 +49,7 @@ export function StateContextProvider({ children }) {
 		}
 	}
 
-	async function removeAllowed(fileName, userAddress) {
+	async function removeAllowed(safeName, userAddress) {
 		if (typeof window.ethereum !== "undefined") {
 			const provider = new ethers.providers.Web3Provider(window.ethereum);
 			const signer = provider.getSigner();
@@ -67,6 +67,25 @@ export function StateContextProvider({ children }) {
 			}
 		}
 	}
+
+    async function deleteSafe(safeName){
+        if(typeof window.ethereum!=="undefined"){
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            const signer = provider.getSigner();
+            const contract = new ethers.Contract(
+                contractAddress,
+                contractABI,
+                signer,
+            );
+            try{
+                const res = await contract.deleteSafe(safeName);
+                await provider.waitForTransaction(res.hash);
+				console.log("Res", res);
+            }catch(err){
+                console.log("Error",err);
+            }
+        }
+    }
 
 	async function fetchUserSafes(userAddress) {
 		let provider;
@@ -114,6 +133,7 @@ export function StateContextProvider({ children }) {
 				createSafe,
 				addAllowed,
 				removeAllowed,
+                deleteSafe,
 				fetchUserSafes,
 				fetchSafesSharedWithUser,
 			}}
