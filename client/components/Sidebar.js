@@ -2,7 +2,7 @@ import styles from "../styles/Sidebar.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import { Button } from "@chakra-ui/react";
+import { Button, Image } from "@chakra-ui/react";
 
 export default function Sidebar() {
 	const router = useRouter();
@@ -12,7 +12,11 @@ export default function Sidebar() {
 	return (
 		<div className={styles.container}>
 			<div>
-				<div className={styles.title}>FileShare.io</div>
+				wwewe
+				<div className={styles.title}>
+					<Image width="4rem" src="/favicon.ico" marginRight={2}/>
+					DocSafe
+				</div>
 				<div className={styles.linkContainer}>
 					<div className={styles.dashboardTitleHolder}>
 						<h1 className={styles.dashboardTitle}>Dashboard</h1>
