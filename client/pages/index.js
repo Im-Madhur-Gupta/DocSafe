@@ -6,9 +6,9 @@ export default function Home() {
 	return (
 		<div className={styles.container}>
 			<Head>
-				<title>FileShare</title>
+				<title>DocSafe</title>
 				<meta
-					name="FileShare"
+					name="DocSafe"
 					content="File Sharing Protocol Powered by Web3"
 				/>
 			</Head>
