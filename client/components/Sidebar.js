@@ -1,19 +1,13 @@
 import styles from "../styles/Sidebar.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useAuth } from "@polybase/react";
 
 import { Button } from "@chakra-ui/react";
 
 export default function Sidebar() {
 	const router = useRouter();
 	const path = router.asPath.split("/").pop();
-	const { auth, state } = useAuth();
 
-	async function handleLogout() {
-		await auth.signOut();
-		router.push("/");
-	}
 
 	return (
 		<div className={styles.container}>
@@ -70,7 +64,6 @@ export default function Sidebar() {
 				</div>
 				<div className={styles.logout}>
 					<Button
-						onClick={handleLogout}
 						color="white"
 						bg="brand.100"
 						size="lg"
