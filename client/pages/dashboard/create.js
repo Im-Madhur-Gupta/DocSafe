@@ -74,7 +74,9 @@ export default function Create() {
   }
 
   async function handleSubmit() {
+
     const uris = await upload({ data: fileList });
+    
     console.log(uris);
     for (let i = 0; i < uris.length; i++) {
       console.log(uris[i]?.slice(7).split('/')[1]);
