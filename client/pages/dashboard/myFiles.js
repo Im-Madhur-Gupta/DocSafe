@@ -132,10 +132,6 @@ export default function MyFiles() {
 		}
 	};
 
-	const handleOnClick = (e) => {
-		console.log(e.target);
-	};
-
 	return (
 		<Layout>
 			<div className={styles.container}>
@@ -203,9 +199,6 @@ export default function MyFiles() {
 														</MenuItem>
 														<MenuItem>
 															Share
-														</MenuItem>
-														<MenuItem>
-															Delete
 														</MenuItem>
 													</MenuList>
 												</Menu>

@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
+import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
+
 contract FileManager {
     struct Safe {
         string name;
@@ -125,5 +127,31 @@ contract FileManager {
                 return;
             }
         }
+    }
+
+    function getSafesForNFT(address NFT) public view returns(Safe[] memory) {
+        require(
+            IERC721(NFT).balanceOf(msg.sender) > 0,
+            "You must own an acceptance NFT to vote for a proposal"
+        );
+
+        uint256 count = 0;
+        for (uint256 i = 1; i <= safeCount; i++) {
+            if (safes[i].accessNFT == NFT) {
+                count++;
+            }
+        }
+
+        Safe[] memory allowedSafes = new Safe[](count);
+        count = 0;
+
+        for (uint256 i = 1; i <= safeCount; i++) {
+            if (safes[i].accessNFT == NFT) {
+                allowedSafes[count]= safes[i];
+                count++;
+            }
+        }
+
+        return allowedSafes;
     }
 }
