@@ -44,8 +44,6 @@ contract FileManager {
 
     function getSafesSharedWith(address _user) public view returns (Safe[] memory) {
 
-        require(msg.sender == _user, "Only user can get safes shared with him");
-
         Safe[] memory sharedSafes;
         uint256 count = 0;
 
@@ -60,8 +58,6 @@ contract FileManager {
     }
 
     function getUserSafes(address _user) public view returns(Safe[] memory) {
-
-        require(msg.sender == _user, "Only user can get his safes");
 
         Safe[] memory userSafes;
         uint256 count = 0;
