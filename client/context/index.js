@@ -71,6 +71,13 @@ export function StateContextProvider({ children }) {
         }
     }
 
+    async function fetchUserSafes(userAddress){
+        if(typeof window.ethereum!=="undefined"){
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            
+        }
+    }
+
     return (
         <StateContext.Provider
             value={{
