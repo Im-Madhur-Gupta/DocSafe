@@ -34,11 +34,50 @@ export function StateContextProvider({ children }) {
         }
     }
 
+    async function addAllowed(fileName,userAddress){
+        if(typeof window.ethereum!=="undefined"){
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            const signer = provider.getSigner();
+            const contract = new ethers.Contract(
+                contractAddress,contractABI,
+                signer
+            );
+            try{
+                const res = await contract.addAllowed(fileName,userAddress);
+                await provider.waitForTransaction(res.hash);
+                console.log("Res",res);
+            }catch(err){
+                console.log("Error",err);
+            }
+        }
+    }
+
+    async function removeAllowed(fileName,userAddress){
+        if(typeof window.ethereum!=="undefined"){
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            const signer = provider.getSigner();
+            const contract = new ethers.Contract(
+                contractAddress,
+                contractABI,
+                signer
+            );
+            try{
+                const res = await contract.removeAllowed(fileName,userAddress);
+                await provider.waitForTransaction(res.hash);
+                console.log("Res",res);
+            }catch(err){
+                console.log("Error",err);
+            }
+        }
+    }
+
     return (
         <StateContext.Provider
             value={{
                 address,
-                createSafe
+                createSafe,
+                addAllowed,
+                removeAllowed
             }}
         >
             {children}
