@@ -15,6 +15,7 @@ import {
 	Tag,
 	TagLabel,
 	TagCloseButton,
+	Spinner,
 } from "@chakra-ui/react";
 import { useStorageUpload, Web3Button } from "@thirdweb-dev/react";
 import { useStateContext } from "../../context";
@@ -23,9 +24,12 @@ export default function Create() {
 	const wrapperRef = useRef(null);
 	const [fileList, setFileList] = useState([]);
 	const [shareWith, setShareWith] = useState([]);
+	const [safeName, setSafeName] = useState("");
 	const [tabIndex, setTabIndex] = useState(0);
-	const [fileName, setFileName] = useState("");
+	const [cid, setCid] = useState("");
+	const [isLoading, setIsLoading] = useState(false);
 	const { createSafe } = useStateContext();
+	const { mutateAsync: upload } = useStorageUpload();
 
 	function handleNextTab() {
 		setTabIndex(1);
@@ -70,156 +74,194 @@ export default function Create() {
 	}
 
 	async function handleSubmit() {
-		// const uris = await upload({ data: fileList });
+		setIsLoading(true);
+		const uris = await upload({ data: fileList });
 		// console.log(uris);
-    	await createSafe("abc","ksdlasd",["asd","asdasd"]);
+		const cid = uris[0].slice(7).split("/")[0];
+		setCid(cid);
+		const fList = [];
+		for (let x = 0; x < uris.length; x++) {
+			fList.push(uris[x].slice(7).split("/")[1]);
+		}
+		setFileList(fList);
+		await createSafe(safeName,cid,fileList);
+		setIsLoading(false);
+		handleNextTab();
 	}
 
-	function handleAddDetails() {}
-
-	async function UploadFile() {
-		console.log(data.data);
+	async function handleAddDetails() {
+		setIsLoading(true);
+		await addAllowed(safeName,shareWith[0]);
+		setIsLoading(false);
 	}
 
-	return (
-		<Layout>
-			<div className={styles.container}>
-				<div className={styles.tabHoldler}>
-					<Tabs
-						index={tabIndex}
-						onChange={setTabIndex}
-						variant="soft-rounded"
-						colorScheme="brand"
-						size="lg"
-						align="center"
-						isFitted
-					>
-						<TabList>
-							<Tab>Upload Files</Tab>
-							<Tab>Enter Details</Tab>
-						</TabList>
-						<TabPanels>
-							<TabPanel>
-								<div className={styles.dndBox}>
-									<div
-										ref={wrapperRef}
-										className={styles.dndContainer}
-										onDragEnter={onDragEnter}
-										onDragLeave={onDragLeave}
-										onDrop={onDrop}
-									>
-										<div className={styles.dndLabel}>
-											<AiOutlineCloudUpload size={120} />
-											<p>Drag & Drop your files here</p>
+	if (isLoading) {
+		return (
+			<div className={styles.loading}>
+				<Spinner
+					thickness="4px"
+					speed="0.65s"
+					emptyColor="gray.200"
+					size="xl"
+					color="brand.100"
+				/>
+			</div>
+		);
+	} else {
+		return (
+			<Layout>
+				<div className={styles.container}>
+					<div className={styles.tabHoldler}>
+						<Tabs
+							index={tabIndex}
+							onChange={setTabIndex}
+							variant="soft-rounded"
+							colorScheme="brand"
+							size="lg"
+							align="center"
+							isFitted
+						>
+							<TabList>
+								<Tab>Upload Files</Tab>
+								<Tab>Enter Details</Tab>
+							</TabList>
+							<TabPanels>
+								<TabPanel>
+									<div className={styles.dndBox}>
+										<div
+											ref={wrapperRef}
+											className={styles.dndContainer}
+											onDragEnter={onDragEnter}
+											onDragLeave={onDragLeave}
+											onDrop={onDrop}
+										>
+											<div className={styles.dndLabel}>
+												<AiOutlineCloudUpload
+													size={120}
+												/>
+												<p>
+													Drag & Drop your files here
+												</p>
+											</div>
+											<input
+												className={styles.dndInput}
+												type="file"
+												value=""
+												onChange={onFileDrop}
+											/>
 										</div>
-										<input
-											className={styles.dndInput}
-											type="file"
-											value=""
-											onChange={onFileDrop}
-										/>
-									</div>
-									{fileList.length > 0 && (
-										<div className={styles.previewFiles}>
-											{fileList.map((item, index) => (
+										{fileList.length > 0 && (
+											<div
+												className={styles.previewFiles}
+											>
+												{fileList.map((item, index) => (
+													<div
+														key={index}
+														className={
+															styles.filebox
+														}
+													>
+														<Tag
+															size="lg"
+															borderRadius="full"
+															variant="solid"
+															bg="transparent"
+														>
+															<TagLabel>
+																{item.name}
+															</TagLabel>
+															<TagCloseButton
+																onClick={() => {
+																	fileRemove(
+																		item
+																	);
+																}}
+															/>
+														</Tag>
+													</div>
+												))}
 												<div
-													key={index}
-													className={styles.filebox}
+													className={
+														styles.buttonContainer
+													}
 												>
+													<Button
+														color="white"
+														bg="brand.100"
+														size="lg"
+														onClick={handleSubmit}
+													>
+														Upload Files
+													</Button>
+												</div>
+											</div>
+										)}
+									</div>
+								</TabPanel>
+								<TabPanel>
+									<div className={styles.formHolder}>
+										<FormControl isRequired color="white">
+											<FormLabel>Safe Name</FormLabel>
+											<Input
+												placeholder="Enter the safe name"
+												size="lg"
+												type="name"
+												value={safeName}
+												onChange={(e) =>
+													setSafeName(e.target.value)
+												}
+											/>
+										</FormControl>
+										<FormControl isRequired color="white">
+											<FormLabel>Share with</FormLabel>
+											<Input
+												type="text"
+												placeholder="Add address of the user you want to share the file with..."
+												size="lg"
+												onKeyDown={handleKeyDown}
+											/>
+										</FormControl>
+										{shareWith.length > 0 && (
+											<div
+												className={styles.emailsHolder}
+											>
+												{shareWith.map((address) => (
 													<Tag
+														key={address}
 														size="lg"
 														borderRadius="full"
 														variant="solid"
-														bg="transparent"
+														bg="brand.100"
 													>
 														<TagLabel>
-															{item.name}
+															{address}
 														</TagLabel>
 														<TagCloseButton
 															onClick={() => {
-																fileRemove(
-																	item
+																removeTag(
+																	address
 																);
 															}}
 														/>
 													</Tag>
-												</div>
-											))}
-											<div
-												className={
-													styles.buttonContainer
-												}
-											>
-												<Button
-													color="white"
-													bg="brand.100"
-													size="lg"
-													onClick={handleSubmit}
-												>
-													Upload Files
-												</Button>
+												))}
 											</div>
-										</div>
-									)}
-								</div>
-							</TabPanel>
-							<TabPanel>
-								<div className={styles.formHolder}>
-									<FormControl isRequired color="white">
-										<FormLabel>File Name</FormLabel>
-										<Input
-											placeholder="Enter the name of the file"
+										)}
+										<Button
+											color="white"
+											bg="brand.100"
 											size="lg"
-											type="name"
-											value={fileName}
-											onChange={(e) =>
-												setFileName(e.target.value)
-											}
-										/>
-									</FormControl>
-									<FormControl isRequired color="white">
-										<FormLabel>Share with</FormLabel>
-										<Input
-											type="text"
-											placeholder="Add username of the people to share with"
-											size="lg"
-											onKeyDown={handleKeyDown}
-										/>
-									</FormControl>
-									{shareWith.length > 0 && (
-										<div className={styles.emailsHolder}>
-											{shareWith.map((email) => (
-												<Tag
-													key={email}
-													size="lg"
-													borderRadius="full"
-													variant="solid"
-													bg="brand.100"
-												>
-													<TagLabel>{email}</TagLabel>
-													<TagCloseButton
-														onClick={() => {
-															removeTag(email);
-														}}
-													/>
-												</Tag>
-											))}
-										</div>
-									)}
-									<Button
-										color="white"
-										bg="brand.100"
-										size="lg"
-										onClick={handleAddDetails}
-									>
-										Continue
-									</Button>
-								</div>
-							</TabPanel>
-						</TabPanels>
-					</Tabs>
+											onClick={handleAddDetails}
+										>
+											Continue
+										</Button>
+									</div>
+								</TabPanel>
+							</TabPanels>
+						</Tabs>
+					</div>
 				</div>
-			</div>
-		</Layout>
-	);
+			</Layout>
+		);
+	}
 }
