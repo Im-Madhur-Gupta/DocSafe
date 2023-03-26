@@ -92,7 +92,7 @@ export default function SharedFiles() {
 								</Tr>
 							</Thead>
 							<Tbody>
-								{fileList.map((item, index) => {
+								{fileList?.map((item, index) => {
 									for (let x = 0; x < item[3].length; x++) {
 										return (
 											<Tr
