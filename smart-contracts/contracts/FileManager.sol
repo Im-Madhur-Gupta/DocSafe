@@ -11,7 +11,7 @@ contract FileManager {
         string[] fileNames;
     }
 
-    mapping (uint256 => Safe) safes;
+    mapping (uint256 => Safe) private safes;
     mapping (uint256 => mapping (address => bool)) allowed;
     uint256 private safeCount;
 
