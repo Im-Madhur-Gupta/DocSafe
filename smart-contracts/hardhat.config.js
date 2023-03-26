@@ -24,7 +24,7 @@ module.exports = {
 			default: 0,
 		},
   },
-  // paths: {
-	// 	artifacts: "../client/artifacts",
-	// },
+  paths: {
+		artifacts: "../client/artifacts",
+	},
 };
