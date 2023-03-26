@@ -136,6 +136,7 @@ export function StateContextProvider({ children }) {
 			);
 			try{
 				const res = await contract.getSafesForNFT(nftAddress);
+				console.log(res);
 				return res;
 			}catch(err){
 				console.log("Error",err);
