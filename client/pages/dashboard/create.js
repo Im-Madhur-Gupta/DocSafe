@@ -17,6 +17,7 @@ import {
 	TagLabel,
 	TagCloseButton,
 	Spinner,
+	Text,
 } from "@chakra-ui/react";
 import { useStorageUpload, Web3Button } from "@thirdweb-dev/react";
 import { useStateContext } from "../../context";
@@ -208,12 +209,12 @@ export default function Create() {
 										<FormLabel>Share with</FormLabel>
 										<Input
 											type="text"
-											placeholder="Add address of the user you want to share the file with..."
+											placeholder="Add address of the user you want to share the file with and press enter"
 											size="lg"
 											onKeyDown={handleKeyDown}
 										/>
 									</FormControl>
-									{shareWith.length > 0 && (
+									{shareWith.length > 0 ? (
 										<div
 											className={styles.emailsHolder}
 										>
@@ -238,7 +239,10 @@ export default function Create() {
 												</Tag>
 											))}
 										</div>
-									)}
+									) :
+										<Text color="white" fontSize="1.3rem">
+											Please add an address to share the file with
+										</Text>}
 									<Button
 										color="white"
 										bg="brand.100"
