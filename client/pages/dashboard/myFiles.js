@@ -13,6 +13,7 @@ import {
 	MenuItem,
 	Button,
 	Heading,
+	Text,
 } from "@chakra-ui/react";
 import { useStateContext } from "../../context";
 
@@ -37,7 +38,6 @@ export default function MyFiles() {
 		}
 	}, []);
 
-	console.log("files", files);
 
 	const router = useRouter();
 	const x = useMotionValue(0);
@@ -137,12 +137,18 @@ export default function MyFiles() {
 			<div className={styles.container}>
 				<div className={styles.greetHolder}>
 					<h1 className={styles.welcome}>Welcome!</h1>
-					<h3 className={styles.username}>@username</h3>
+					<h3 className={styles.username}>{address}</h3>
 				</div>
 				<div className={styles.myFilesContainer}>
-					<div className={styles.myFilesTitleHolder}>
-						<h1 className={styles.myFilesTitle}>My Files</h1>
-					</div>
+					<h1 className={styles.title} style={{ paddingTop: "20px" }}>My files</h1>
+					<Text
+						color="white"
+						paddingLeft="30px"
+						fontSize={22}
+						marginBottom={10}
+					>
+						Files that you have added will be displayed here.
+					</Text>
 					<motion.div
 						className={styles.myFileHolderParent}
 						whileTap={{ cursor: "grabbing" }}
@@ -177,21 +183,22 @@ export default function MyFiles() {
 													borderRadius="full"
 													variant="solid"
 													bg="transparent"
+													color="white"
 												>
 													<TagLabel>
-														{item[3][x]}
+														{item[4][x]}
 													</TagLabel>
 												</Tag>
 												<Menu>
 													<MenuButton>
-														<BsThreeDots />
+														<BsThreeDots color="white" />
 													</MenuButton>
 													<MenuList>
 														<MenuItem
 															onClick={() =>
 																viewFileHandler(
 																	item[1],
-																	item[3][x]
+																	item[4][x]
 																)
 															}
 														>
@@ -208,7 +215,7 @@ export default function MyFiles() {
 								}
 							})
 						) : (
-							<Heading>No files found</Heading>
+							<Heading color="white">No files found</Heading>
 						)}
 					</motion.div>
 				</div>

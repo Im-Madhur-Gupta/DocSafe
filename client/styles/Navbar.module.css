@@ -1,13 +1,10 @@
 .container {
-    position: absolute;
-    width: 100%;
-    height: 90px;
-    left: 0px;
-    top: 0px;
+    width: 100vw;
+    height: 100px;
     background: #222326;
     box-shadow: 0px 7px 6px rgba(0, 0, 0, 0.25);
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
 }
 
@@ -28,4 +25,17 @@
 
 .wallet{
     margin-right: 60px;
+}
+
+.title {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 35px;
+    line-height: 55px;
+    height: 130px;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

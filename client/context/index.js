@@ -136,6 +136,7 @@ export function StateContextProvider({ children }) {
 			);
 			try{
 				const res = await contract.getSafesForNFT(nftAddress);
+				console.log(res);
 				return res;
 			}catch(err){
 				console.log("Error",err);
@@ -174,8 +175,14 @@ export function StateContextProvider({ children }) {
 				process.env.NEXT_PUBLIC_MANTLE_RPC_URL
 			);
 		}
+		const contract = new ethers.Contract(
+			contractAddress,
+			contractABI,
+			provider
+		);
 		try {
 			const res = await contract.getSafesSharedWith(userAddress);
+			console.log(res);
 			return res;
 		} catch (err) {
 			console.log("Error", err);

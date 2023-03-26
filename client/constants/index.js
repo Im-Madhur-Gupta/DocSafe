@@ -1,1 +1,1 @@
-export const fileManagerAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+export const fileManagerAddress = "0x6a7f89957E1e297c731f6Be8d0D4e2E80eAF544b"

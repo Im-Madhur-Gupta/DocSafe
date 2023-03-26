@@ -4,3 +4,16 @@
     display: flex;
     height: 100%;
 }
+
+
+.formHolder {
+    width: 100%;
+    margin: 40px;
+    display: flex;
+    flex-direction: column;
+    /* height: 78%; */
+    background: #222326;
+    border-radius: 35px;
+    padding: 30px;
+    gap: 40px;
+}
