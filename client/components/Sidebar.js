@@ -57,6 +57,17 @@ export default function Sidebar() {
 									Add new files
 								</div>
 							</Link>
+							<Link href="/dashboard/accessviaNFT">
+								<div
+									className={
+										path === "accessviaNFT"
+											? styles.selectedLink
+											: styles.link
+									}
+								>
+									Access via NFT
+								</div>
+							</Link>
 						</div>
 					</div>
 				</div>
