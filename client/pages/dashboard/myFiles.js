@@ -37,7 +37,6 @@ export default function MyFiles() {
 		}
 	}, []);
 
-	console.log("files", files);
 
 	const router = useRouter();
 	const x = useMotionValue(0);
@@ -179,7 +178,7 @@ export default function MyFiles() {
 													bg="transparent"
 												>
 													<TagLabel>
-														{item[3][x]}
+														{item[4][x]}
 													</TagLabel>
 												</Tag>
 												<Menu>
@@ -191,7 +190,7 @@ export default function MyFiles() {
 															onClick={() =>
 																viewFileHandler(
 																	item[1],
-																	item[3][x]
+																	item[4][x]
 																)
 															}
 														>

@@ -16,7 +16,7 @@ const theme = extendTheme({
 
 function MyApp({ Component, pageProps }) {
 	return (
-		<ThirdwebProvider activeChain={Localhost}>
+		<ThirdwebProvider activeChain={MantleTestnet}>
 			<ChakraProvider theme={theme}>
 				<StateContextProvider>
 					<Component {...pageProps} />
